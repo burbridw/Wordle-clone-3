@@ -11,12 +11,15 @@ body {
 }
 
 .everything {
-    width: 100%;
-    height: 95vh;
+    margin: 0 auto;
+    width: 510px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-content: space-between
+    align-content: space-between;
+    justify-content: center;
 }
+
 header {
     width: 500px;
     margin: 0 auto;
@@ -24,6 +27,7 @@ header {
     font-size: 1.2rem;
     border-bottom: 2px double black;
 }
+
 header button {
     position: relative;
     left: 30%;
@@ -45,7 +49,7 @@ header span {
     font-style: italic;
 }
 #message-box {
-    width: 20%;
+    width: 330px;
     height: 2rem;
     text-align: center;
     font-size: 1.5rem;
@@ -73,6 +77,7 @@ header span {
     overflow: scroll;
     border-radius: 10px;
 }
+
 .dictionary-image {
     width: 100%;
     max-width: 160px;
@@ -98,6 +103,7 @@ header span {
     font-weight: bold;
     border: 1px solid black;
     border-radius: 10px;
+    overflow: visible;
 }
 .dictionary button:hover {
     background-color: yellow;
@@ -122,6 +128,7 @@ header span {
     align-items: center;
     box-shadow: 1px 2px 2px dimgray;
 }
+
 .reset-box button {
     height: 3rem;
     position: relative;
@@ -137,6 +144,7 @@ header span {
     width: 100%;
     text-align: center;
     margin: 0;
+    border-radius: 10px;
 }
 #end-image {
     display: flex;
@@ -150,35 +158,43 @@ header span {
     align-items: center;
 }
 .upper-container {
-    flex-grow: 1;
-    align-items: center;
-}
-
-.upper-container,.lower-container {
+    width: 100%;
+    height: 60%;
+    max-height: 380px;
+    margin-top: auto;
+    margin-bottom: auto;
     display: flex;
     justify-content: center;
-    
+}
+.lower-container {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
 }
 .upper-inner-container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     width: 510px;
-    height: 410px;
+    height: 100%;
 }
 .answer-box-container {
-    display:flex;
+    /*display:flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap;*/
     width: 350px;
-    height: 410px;
+    height: 100%;
+    max-height: 410px;
     justify-content: center;
     gap: 1px;
     
 }
 .answer-image-container {
     width: 120px;
-    height: 410px;
+    height: 100%;
+    max-height: 410px;
     margin-left: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -187,7 +203,7 @@ header span {
 }
 .answer-image {
     width: 80px;
-    height: 65px;
+    height: 60px;
     border-radius: 5px;
 }
 .answer-image img {
@@ -199,7 +215,7 @@ header span {
     height: 60px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .answer-box {
@@ -221,7 +237,7 @@ header span {
     flex-direction: row;
     flex-wrap: wrap;
     width: 500px;
-    height: 200px;
+    height: 100%;
     justify-content: center;
     gap: 4px;
     text-align: center;
@@ -235,12 +251,14 @@ header span {
     border-radius: 15%;
     transition: all 0.1s linear;
 }
-.key:nth-of-type(20), .key:nth-of-type(28) {
+.actionkey {
     width: 13%;
+    height: 30%;
     font-size: 20px;
+    border-radius: 15%;
     text-align: center;
+    transition: all 0.1s linear;
 }
-
 .hide-me {
     display: none;
 }
@@ -249,6 +267,65 @@ header span {
     opacity: 50%;
 }
 
+@media (max-width:800px) {
+    .everything {
+        width: 360px;
+    }
+    .dictionary {
+    width: 360px;
+    height: 500px;
+    }
+    .dictionary-image {
+        max-width: 90px;
+        height: 30px;
+        font-size: 1rem;
+    }
+    .dictionary-image img {
+        height: 25px;
+        width: 35px;
+    }
+    header {
+        width: 350px;
+    }
+    header button {
+        left: 20%;
+    }
+    .reset-box {
+        width: 300px;
+    }
+    .answer-box-container {
+        width: 280px;
+    }
+    .upper-container {
+        max-height: 360px;
+    }
+    .lower-container {
+        margin-bottom: 0;
+        height: 160px;
+    }
+    .keyboard {
+        width: 350px;
+        margin-top: 2px;
+        gap: 3px;
+    }
+    .key {
+        font-size: 24px;
+    }
+    .answer-image-container {
+        width: 80px;
+        margin-left: 5px;
+    }
+}
+@media (min-width: 1200px) {
+    .dictionary {
+        width: 1180px;
+    }
+}
+@media (min-width: 1600px) {
+    .dictionary {
+        width: 1550px;
+    }
+}
 .dictionary-close {
     height: 0px;
     border: none;
