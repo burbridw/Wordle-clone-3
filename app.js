@@ -41,7 +41,6 @@ function start() {
     randomSelectThree = Math.floor( Math.random()*53 )
     word = threeLetterWords[randomSelectThree]
     answerArr = word.split("")
-    console.log(answerArr)
     answerCount = 0
     round = 0
     correctGuess = 0
@@ -80,110 +79,12 @@ let answerBox0 = answerInput.children[0]
 let answerBox1 = answerInput.children[1]
 let answerBox2 = answerInput.children[2]
 
-const qKey = keyboardDiv.children[0]
-const wKey = keyboardDiv.children[1]
-const eKey = keyboardDiv.children[2]
-const rKey = keyboardDiv.children[3]
-const tKey = keyboardDiv.children[4]
-const yKey = keyboardDiv.children[5]
-const uKey = keyboardDiv.children[6]
-const iKey = keyboardDiv.children[7]
-const oKey = keyboardDiv.children[8]
-const pKey = keyboardDiv.children[9]
-const aKey = keyboardDiv.children[10]
-const sKey = keyboardDiv.children[11]
-const dKey = keyboardDiv.children[12]
-const fKey = keyboardDiv.children[13]
-const gKey = keyboardDiv.children[14]
-const hKey = keyboardDiv.children[15]
-const jKey = keyboardDiv.children[16]
-const kKey = keyboardDiv.children[17]
-const lKey = keyboardDiv.children[18]
-const zKey = keyboardDiv.children[21]
-const xKey = keyboardDiv.children[22]
-const cKey = keyboardDiv.children[23]
-const vKey = keyboardDiv.children[24]
-const bKey = keyboardDiv.children[25]
-const nKey = keyboardDiv.children[26]
-const mKey = keyboardDiv.children[27]
-
-qKey.addEventListener("click",function() {
-    press("q")
-})
-wKey.addEventListener("click",function() {
-    press("w")
-})
-eKey.addEventListener("click",function() {
-    press("e")
-})
-rKey.addEventListener("click",function() {
-    press("r")
-})
-tKey.addEventListener("click",function() {
-    press("t")
-})
-yKey.addEventListener("click",function() {
-    press("y")
-})
-uKey.addEventListener("click",function() {
-    press("u")
-})
-iKey.addEventListener("click",function() {
-    press("i")
-})
-oKey.addEventListener("click",function() {
-    press("o")
-})
-pKey.addEventListener("click",function() {
-    press("p")
-})
-aKey.addEventListener("click",function() {
-    press("a")
-})
-sKey.addEventListener("click",function() {
-    press("s")
-})
-dKey.addEventListener("click",function() {
-    press("d")
-})
-fKey.addEventListener("click",function() {
-    press("f")
-})
-gKey.addEventListener("click",function() {
-    press("g")
-})
-hKey.addEventListener("click",function() {
-    press("h")
-})
-jKey.addEventListener("click",function() {
-    press("j")
-})
-kKey.addEventListener("click",function() {
-    press("k")
-})
-lKey.addEventListener("click",function() {
-    press("l")
-})
-zKey.addEventListener("click",function() {
-    press("z")
-})
-xKey.addEventListener("click",function() {
-    press("x")
-})
-cKey.addEventListener("click",function() {
-    press("c")
-})
-vKey.addEventListener("click",function() {
-    press("v")
-})
-bKey.addEventListener("click",function() {
-    press("b")
-})
-nKey.addEventListener("click",function() {
-    press("n")
-})
-mKey.addEventListener("click",function() {
-    press("m")
+let allKeys = document.querySelectorAll(".key")
+allKeys.forEach( (x) => {
+    x.addEventListener("click",function() {
+        let letter = x.textContent
+        press(letter)
+    })
 })
 
 window.addEventListener("keydown", (x) => {       
