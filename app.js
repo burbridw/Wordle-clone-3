@@ -1,6 +1,3 @@
-const threeLetterWords = ["ice", "big", "car", "nut", "old", "red", "eve", "tea", "cat", "pen", "leg", "get", "vet", "bed", "hat", "toe", "boy", "gym", 
-"pie", "cap", "new", "tag", "fun", "box", "ear", "hot", "buy", "eat", "run", "see", "ant", "gas", "ate", "bus", "saw", "had", "cup", "egg", "bat", "eye", 
-"dog", "sad", "try", "ham", "and", "cow", "bag", "map", "art", "sea", "day", "zoo", "pig"]
 
 const threeLetterWordsObj = {
     "ice": "./images/desserts/img4.png", "big": "./images/conditions/img1.png", "car": "./images/vehicles/img2.png", "nut": "./images/fruitsvegetables/img18.png", 
@@ -15,8 +12,11 @@ const threeLetterWordsObj = {
     "bat": "./images/commonitems/img2.png", "eye": "./images/body/img6.png", "dog": "./images/animals/img17.png", "sad": "./images/feelings/img5.png", "try": "./images/actions2/img7.png", 
     "ham": "./images/ingredients/img5.png", "and": "./images/subjects/img8.png", "cow": "./images/animals/img11.png", "bag": "./images/commonitems/img4.png", 
     "map": "./images/commonitems/img16.png", "art": "./images/clubactivities/img11.png", "sea": "./images/nature/img9.png", "day": "./images/yearlyevents/img2.png", 
-    "zoo": "./images/buildings/img27.png", "pig": "./images/animals/img13.png"
+    "zoo": "./images/buildings/img27.png", "pig": "./images/animals/img13.png", "one": "./images/numbers/img1.png", "two": "./images/numbers/img2.png", 
+    "six": "./images/numbers/img6.png", "ten": "./images/numbers/img10.png"
 }
+
+const threeLetterWords = Object.keys(threeLetterWordsObj)
 
 let word = ""
 let randomSelectThree = "" 
@@ -27,19 +27,19 @@ let gameActive = true
 let inputArr = []
 let answerArr = []
 const dictionary = document.querySelector(".dictionary")
-function buildDictionary() {
+function buildDictionary(obj) {
     threeLetterWords.forEach( (x) => {
-        dictionary.innerHTML += `<div class="dictionary-image">${x} <img src="${threeLetterWordsObj[x]}"></div>`
+        dictionary.innerHTML += `<div class="dictionary-image">${x} <img src="${obj[x]}"></div>`
     })
 
 }
 
-buildDictionary()
-start()
+buildDictionary(threeLetterWordsObj)
+start(threeLetterWords)
 
-function start() {
-    randomSelectThree = Math.floor( Math.random()*53 )
-    word = threeLetterWords[randomSelectThree]
+function start(list) {
+    randomSelectThree = Math.floor( Math.random()*list.length )
+    word = list[randomSelectThree]
     answerArr = word.split("")
     answerCount = 0
     round = 0
@@ -94,11 +94,11 @@ window.addEventListener("keydown", (x) => {
         } else if (x.key === "Backspace") {
             del()
         } else {
-        if ( /[a-z]/.test(x.key) && x.key.length === 1) {
+            if ( /[a-z]/.test(x.key) && x.key.length === 1) {
             press(x.key)
+            }
         }
-        }
-        } else {
+    } else {
         if (x.key === "Enter") {
             resetGame()
         }
@@ -175,27 +175,24 @@ function resetGame() {
     imageBoxes.forEach( (x) => {
         x.textContent = ""
     })
-    start()
+    start(threeLetterWords)
 }
 
 function checkGuess() {
     let thisGuess = inputArr.join("")
     
     if (gameActive) {
-    if (answerCount !== 3) {
-        showMessage("Not enough letters")
-    } else if ( !threeLetterWords.includes(thisGuess) ) {
-        showMessage("Word not in list")
-    } else {
-        let currentImageBox = imageBox.children[round]
-        console.log(currentImageBox)
-        console.log(thisGuess)
-        let currentImage = threeLetterWordsObj[thisGuess]
-        console.log(currentImage)
-        currentImageBox.innerHTML = `<img src=${currentImage}>`
-        greenCheck()
+        if (answerCount !== 3) {
+            showMessage("Not enough letters")
+        } else if ( !threeLetterWords.includes(thisGuess) ) {
+            showMessage("Word not in list")
+        } else {
+            let currentImageBox = imageBox.children[round]
+            let currentImage = threeLetterWordsObj[thisGuess]
+            currentImageBox.innerHTML = `<img src=${currentImage}>`
+            greenCheck()
+        }
     }
-}
 }
 
 function showMessage(message) {
@@ -209,7 +206,6 @@ function showMessage(message) {
 function greenCheck() {
     for ( let i = 0; i < answerArr.length; i++ ) {
         if (answerArr[i] === inputArr[i]) {
-            console.log("green" + i)
             let currentAnswer = answerInput.children[i]
             currentAnswer.style.backgroundColor ="greenyellow"
 
@@ -222,11 +218,9 @@ function greenCheck() {
             correctGuess++
             answerArr.splice( i, 1, "*")
             inputArr.splice( i, 1, "@")
-            console.log(answerArr)
-            console.log(inputArr)
             }
         }   
-            if ( correctGuess === 3) {
+        if ( correctGuess === 3) {
             playerWins()
         } else {    
             yellowCheck()
@@ -236,8 +230,7 @@ function greenCheck() {
 function yellowCheck() {
     for ( let i = 0; i < answerArr.length; i++ ) {
         if (answerArr.includes(inputArr[i]) && answerArr[i] !== inputArr[i]) {
-        console.log("yellow" + i)
-        let currentAnswer = answerInput.children[i]
+            let currentAnswer = answerInput.children[i]
             currentAnswer.style.backgroundColor ="yellow"
 
             let allKeys = document.querySelectorAll(".key")
@@ -246,22 +239,18 @@ function yellowCheck() {
                     x.style.backgroundColor = "yellow"
                 }
             })
-        console.log(answerArr.indexOf(`${inputArr[i]}`))
         let cutIndex = answerArr.indexOf(`${inputArr[i]}`)
 
         inputArr.splice( i, 1, "@")
         
         answerArr.splice( cutIndex, 1, "*")
         
-        console.log(answerArr)
-        console.log(inputArr)
         } 
     }  for ( let i = 0; i < 3; i++ ) {
         let currentAnswer = answerInput.children[i]
         let allKeys = document.querySelectorAll(".key")
         if (currentAnswer.style.backgroundColor !== "greenyellow" && currentAnswer.style.backgroundColor !== "yellow") {
             currentAnswer.style.backgroundColor = "darkgray"
-            console.log(currentAnswer.textContent)
             allKeys.forEach ( (x) => {
                 if (x.textContent === currentAnswer.textContent && x.style.backgroundColor !== "greenyellow" && x.style.backgroundColor !== "yellow") {
                     x.style.backgroundColor = "darkgray"
